@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "6430110af5a7e52ce1e8fa67",
+    "name": "Monika Harlin",
+    "image": "/assets/Ellipse90.png",
+    "details": "RealCodeLab completely changed how I learn to code! Pair programming and real-time editing made it so interactive and fun. The best part? Zero setup needed.",
+    "rating": 5
+  },
+  {
+    "_id": "64301123f5a7e52ce1e8fa68",
+    "name": "jon Smith",
+    "image": "/assets/Ellipse91.png",
+    "details": "I love how beginner-friendly RealCodeLab is. The collaborative editor helped me work with my classmates smoothly. It would be great to have more night sessions though!",
+    "rating": 4
+  },
+  {
+    "_id": "6430113af5a7e52ce1e8fa69",
+    "name": "Robert Johnson",
+    "image": "/assets/Ellipse92.png",
+    "details": "The real-time code sharing and built-in compiler are game-changers. RealCodeLab helped me debug and learn faster than ever before. Highly recommended!",
+    "rating": 5
+  }
+]
