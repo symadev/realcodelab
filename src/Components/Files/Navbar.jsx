@@ -35,53 +35,54 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex gap-8 items-center">
-          <li>
-            <Link
-              to="/"
-              className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-            >
-              <span className="relative z-10">Home</span>
-              <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/workflow"
-              className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-            >
-              <span className="relative z-10">Workflow</span>
-              <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/features"
-              className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-            >
-              <span className="relative z-10">Features</span>
-              <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/testimonials"
-              className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-            >
-              <span className="relative z-10">Testimonials</span>
-              <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/login"
-              className="relative text-white btn bg-gradient-to-r from-yellow-500/20 via-blue-500/20 to-green-500/20  border border-white/20  px-10 py-4 rounded-2xl  text-lg shadow-2xl hover:shadow-yellow-500/25 hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-            >
-              <span className="relative z-10">Login</span>
-              <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </Link>
-          </li>
-        </ul>
+       <ul className="hidden lg:flex gap-8 items-center">
+  <li>
+    <a
+      href="#home"
+      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Home</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="#how-it-works"
+      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Workflow</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="#features"
+      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Features</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="#testimonials"
+      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Testimonials</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="/login"
+      className="relative text-white btn bg-gradient-to-r from-yellow-500/20 via-blue-500/20 to-green-500/20 border border-white/20 px-10 py-4 rounded-2xl text-lg shadow-2xl hover:shadow-yellow-500/25 hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Login</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+</ul>
+
 
         {/* Mobile Menu Button */}
         <button
@@ -101,52 +102,53 @@ const Navbar = () => {
       <div className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-[#0f1f60] to-[#1a2b7a] transform transition-transform duration-300 z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="pt-20 px-6">
           <ul className="space-y-6">
-            <li>
-              <Link
-                to="/"
-                onClick={toggleMenu}
-                className="block text-white hover:text-yellow-400 text-lg font-medium py-3 border-b border-white/10 transition-colors duration-300"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/workflow"
-                onClick={toggleMenu}
-                className="block text-white hover:text-yellow-400 text-lg font-medium py-3 border-b border-white/10 transition-colors duration-300"
-              >
-                Workflow
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/features"
-                onClick={toggleMenu}
-                className="block text-white hover:text-yellow-400 text-lg font-medium py-3 border-b border-white/10 transition-colors duration-300"
-              >
-                Features
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/testimonials"
-                onClick={toggleMenu}
-                className="block text-white hover:text-yellow-400 text-lg font-medium py-3 border-b border-white/10 transition-colors duration-300"
-              >
-                Testimonials
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/login"
-                onClick={toggleMenu}
-                className="block text-white btn btn-secondary hover:text-yellow-400 text-lg font-medium py-3 border-b border-white/10 transition-colors duration-300"
-              >
-                Login
-              </Link>
-            </li>
-          </ul>
+  <li>
+    <a
+      href="#home"
+      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Home</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="#how-it-works"
+      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Workflow</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="#features"
+      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Features</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="#testimonials"
+      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Testimonials</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="/login"
+      className="relative text-white btn bg-gradient-to-r from-yellow-500/20 via-blue-500/20 to-green-500/20 border border-white/20 px-10 py-4 rounded-2xl text-lg shadow-2xl hover:shadow-yellow-500/25 hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+    >
+      <span className="relative z-10">Login</span>
+      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </a>
+  </li>
+</ul>
+
         </div>
       </div>
     </nav>
