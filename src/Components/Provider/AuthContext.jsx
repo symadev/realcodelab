@@ -9,8 +9,8 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const axiosPublic = UseAxiosPublic();
 
-  const createUser = async (name, email, password, role = "parent") => {
-  const res = await axiosPublic.post("/signup", { name, email, password, role });
+  const createUser = async (name, email, password, ) => {
+  const res = await axiosPublic.post("/signup", { name, email, password,  });
   const { token, user } = res.data;
 
   localStorage.setItem("token", token);
@@ -25,8 +25,8 @@ const AuthProvider = ({ children }) => {
 
 const signIn = async (email, password) => {
   const res = await axiosPublic.post("/login", { email, password });
-  const { token, user } = res.data;
-  localStorage.setItem("token", token);
+  const {  user } = res.data;
+
   setUser(user); // This sets role, name, etc. for Navbar
   return user;
 };
