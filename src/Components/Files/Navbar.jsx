@@ -1,8 +1,36 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import UseAuth from "../Provider/UseAuth";
+import { AuthContext } from "../Provider/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+  const { user, logOut } = useContext(AuthContext);
+
+
+
+
+  const openLogin = () => {
+    setShowRegisterModal(false);
+    setShowLoginModal(true);
+  };
+
+  const openRegister = () => {
+    setShowLoginModal(false);
+    setShowRegisterModal(true);
+  };
+
+
+  const closeLogin = () => setShowLoginModal(false);
+  const closeRegister = () => setShowRegisterModal(false);
+
+
 
   const handleLogout = () => {
     logOut()
@@ -35,53 +63,65 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-       <ul className="hidden lg:flex gap-8 items-center">
-  <li>
-    <a
-      href="#home"
-      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Home</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="#how-it-works"
-      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Workflow</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="#features"
-      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Features</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="#testimonials"
-      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Testimonials</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="/login"
-      className="relative text-white btn bg-gradient-to-r from-yellow-500/20 via-blue-500/20 to-green-500/20 border border-white/20 px-10 py-4 rounded-2xl text-lg shadow-2xl hover:shadow-yellow-500/25 hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Login</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-</ul>
+        <ul className="hidden lg:flex gap-8 items-center">
+          <li>
+            <a
+              href="#home"
+              className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+            >
+              <span className="relative z-10">Home</span>
+              <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#how-it-works"
+              className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+            >
+              <span className="relative z-10">Workflow</span>
+              <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#features"
+              className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+            >
+              <span className="relative z-10">Features</span>
+              <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#testimonials"
+              className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+            >
+              <span className="relative z-10">Testimonials</span>
+              <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </a>
+          </li>
+          <li>
+
+            {user ? (
+              <>
+
+                <button
+                  onClick={handleLogout}
+                  className="ml-2 px-4 py-2 bg-red-400 text-white rounded-full hover:bg-red-500 transition"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={openLogin}
+                className="ml-4 px-6 py-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-pink-600 hover:to-orange-600"
+              >
+                Login/SignUp
+              </button>
+            )}
+          </li>
+        </ul>
 
 
         {/* Mobile Menu Button */}
@@ -102,55 +142,84 @@ const Navbar = () => {
       <div className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-[#0f1f60] to-[#1a2b7a] transform transition-transform duration-300 z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="pt-20 px-6">
           <ul className="space-y-6">
-  <li>
-    <a
-      href="#home"
-      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Home</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="#how-it-works"
-      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Workflow</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="#features"
-      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Features</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="#testimonials"
-      className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Testimonials</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="/login"
-      className="relative text-white btn bg-gradient-to-r from-yellow-500/20 via-blue-500/20 to-green-500/20 border border-white/20 px-10 py-4 rounded-2xl text-lg shadow-2xl hover:shadow-yellow-500/25 hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
-    >
-      <span className="relative z-10">Login</span>
-      <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-    </a>
-  </li>
-</ul>
+            <li>
+              <a
+                href="#home"
+                className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+              >
+                <span className="relative z-10">Home</span>
+                <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#how-it-works"
+                className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+              >
+                <span className="relative z-10">Workflow</span>
+                <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#features"
+                className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+              >
+                <span className="relative z-10">Features</span>
+                <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#testimonials"
+                className="relative text-white hover:text-yellow-400 text-[16px] font-medium transition-all duration-300 group"
+              >
+                <span className="relative z-10">Testimonials</span>
+                <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-200 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </a>
+            </li>
+            <li>
+
+              {user ? (
+                <>
+
+                  <button
+                    onClick={handleLogout}
+                    className="ml-2 px-4 py-2 bg-red-400 text-white rounded-full hover:bg-red-500 transition"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={openLogin}
+                  className="ml-4 px-6 py-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-pink-600 hover:to-orange-600"
+                >
+                  Login/SignUp
+                </button>
+              )}
+            </li>
+          </ul>
 
         </div>
       </div>
+
+      {/* Modals */}
+      <Login
+        isOpen={showLoginModal}
+        onRequestClose={closeLogin}
+        openRegister={openRegister}
+      />
+      <SignUp
+        isOpen={showRegisterModal}
+        onRequestClose={closeRegister}
+        openLogin={openLogin}
+      />
+
+
+
+
+
     </nav>
   );
 };

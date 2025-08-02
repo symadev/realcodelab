@@ -94,10 +94,7 @@ const Testimonial = () => {
                                   className="w-full h-full rounded-full object-cover"
                                   src={review.image}
                                   alt={review.name}
-                                  onError={(e) => {
-                                    e.target.src =
-                                      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80";
-                                  }}
+                                 
                                 />
                               </div>
                             </div>
