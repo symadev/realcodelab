@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import UseAuth from "../Provider/UseAuth";
+
 import { AuthContext } from "../Provider/AuthContext";
 
 const Navbar = () => {
@@ -110,6 +110,13 @@ const Navbar = () => {
                   className="ml-2 px-4 py-2 bg-red-400 text-white rounded-full hover:bg-red-500 transition"
                 >
                   Logout
+                </button>
+
+                  <button
+                  
+                  className="ml-2 px-4 py-2 bg-gradient-to-r from-yellow-500/20 via-blue-500/20 to-green-500/20  border border-white/20  font-bold text-lg shadow-2xl hover:shadow-yellow-500/25 transform hover:scale-105 transition-all duration-500 text-white rounded-full"
+                >
+                  Create Room
                 </button>
               </>
             ) : (

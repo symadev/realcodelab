@@ -12,18 +12,17 @@ const SignUp = ({ isOpen, onRequestClose, openLogin }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const axiosPublic = UseAxiosPublic();
-  const { createUser } = useContext(AuthContext); 
+  const { createUser } = useContext(AuthContext);
 
   const onSubmit = async (data) => {
     try {
       //create the user
-      await createUser( data.name,data.email, data.password);
+      await createUser(data.email, data.password);
 
       // Step 2: make te user object here
       const newUser = {
         name: data.name,
         email: data.email,
-        password: data.password, 
         role: "user",
         createdAt: new Date()
       };
@@ -33,11 +32,13 @@ const SignUp = ({ isOpen, onRequestClose, openLogin }) => {
 
       if (response.data.insertedId) {
         toast.success("SignUp Successful");
-        reset();
         navigate("/");
+
+
       } else {
         toast.error("Signup failed to save user");
       }
+      reset();
     } catch (error) {
       console.error(error);
       toast.error("Error occurred during signup");

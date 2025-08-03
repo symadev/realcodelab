@@ -25,7 +25,9 @@ const AuthProvider = ({ children }) => {
 
 const signIn = async (email, password) => {
   const res = await axiosPublic.post("/login", { email, password });
-  const {  user } = res.data;
+  const { token, user } = res.data;
+
+localStorage.setItem("token", token); //token must be set in localStorage here, this is because the me route find the token 
 
   setUser(user); // This sets role, name, etc. for Navbar
   return user;
