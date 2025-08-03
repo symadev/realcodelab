@@ -17,12 +17,13 @@ const SignUp = ({ isOpen, onRequestClose, openLogin }) => {
   const onSubmit = async (data) => {
     try {
       //create the user
-      await createUser(data.email, data.password);
+      await createUser( data.name,data.email, data.password);
 
       // Step 2: make te user object here
       const newUser = {
         name: data.name,
         email: data.email,
+        password: data.password, 
         role: "user",
         createdAt: new Date()
       };
