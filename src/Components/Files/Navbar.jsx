@@ -4,10 +4,11 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 
 import { AuthContext } from "../Provider/AuthContext";
+import { Moon, Sun } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
@@ -51,15 +52,23 @@ const Navbar = () => {
         <div className="flex items-center gap-3 flex-1">
           <div className="relative group">
             <img
-              className="w-12 h-12 object-cover  transition-all duration-300  group-hover:scale-110 group-hover:rotate-6"
+              className="w-10 h-10 object-cover  transition-all duration-300  group-hover:scale-110 group-hover:rotate-6"
               src="/assets/logo.png"
               alt="Logo"
             />
             <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           <span className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-blue-200 bg-clip-text text-transparent hover:from-yellow-300 hover:to-yellow-100 transition-all duration-300">
-            RealCODELab
+            RCODELab
           </span>
+
+          <button
+           
+            className="p-2 rounded dark:black text-purple-600 dark:text-white hover:scale-105 transition"
+           
+          >
+             <Sun size={20} />
+          </button>
         </div>
 
         {/* Desktop Menu */}
@@ -112,8 +121,8 @@ const Navbar = () => {
                   Logout
                 </button>
 
-                  <button
-                  
+                <button
+
                   className="ml-2 px-4 py-2 bg-gradient-to-r from-yellow-500/20 via-blue-500/20 to-green-500/20  border border-white/20  font-bold text-lg shadow-2xl hover:shadow-yellow-500/25 transform hover:scale-105 transition-all duration-500 text-white rounded-full"
                 >
                   Create Room
