@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-
 import UseAxiosPublic from "./UseAxiosPublic";
 
 export const AuthContext = createContext(null);
@@ -9,36 +8,51 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const axiosPublic = UseAxiosPublic();
 
-  const createUser = async (name, email, password, ) => {
-  const res = await axiosPublic.post("/signup", { name, email, password,  });
-  const { token, user } = res.data;
+  // Create user (signup) and store token
+  const createUser = async (name, email, password) => {
+    try {
+      const res = await axiosPublic.post("/signup", { name, email, password });
+      const { token, user } = res.data;
 
-  localStorage.setItem("token", token);
-  setUser(user);
+      localStorage.setItem("token", token); // Save token
+      setUser(user); // Set user state
 
-  return res.data;
-};
-
-
-// here i can set the token in login and  the signup   also 
-// here need to set the token in the signup for set the login automatically after the registration
-
-const signIn = async (email, password) => {
-  const res = await axiosPublic.post("/login", { email, password });
-  const { token, user } = res.data;
-
-localStorage.setItem("token", token); //token must be set in localStorage here, this is because the me route find the token 
-
-  setUser(user); // This sets role, name, etc. for Navbar
-  return user;
-};
-
-
-  const logOut = () => {
-    setUser(null);
-    localStorage.removeItem("token");
+      return res.data;
+    } catch (error) {
+      console.error("Signup error:", error);
+      throw error;
+    }
   };
 
+  
+// here i can set the token in login and  the signup   also 
+// here need to set the token in the signup for set the login automatically after the registration
+  const signIn = async (email, password) => {
+    try {
+      const res = await axiosPublic.post("/login", { email, password });
+      const { token, user } = res.data;
+
+      localStorage.setItem("token", token); // Save token
+      setUser(user); // Set user state
+
+      return user;
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
+    }
+  };
+
+  // Logout user
+const logOut = async () => {
+  setLoading(true);
+  setUser(null);
+  localStorage.removeItem("token");
+  setLoading(false);
+};
+
+
+
+  // Get current user if token exists (on refresh)
   const getMe = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -49,10 +63,13 @@ localStorage.setItem("token", token); //token must be set in localStorage here, 
 
     try {
       const res = await axiosPublic.get("/me", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       setUser(res.data);
     } catch (err) {
+      console.error("Token invalid or expired:", err);
       localStorage.removeItem("token");
       setUser(null);
     } finally {
@@ -60,16 +77,8 @@ localStorage.setItem("token", token); //token must be set in localStorage here, 
     }
   };
 
-
-
-//   When a user logs in, you store their token in localStorage.
-// Now if they refresh the page, your app loses state (the user variable is reset).
-// getMe() checks if a token exists and re-authenticates the user.
-
-
-
   useEffect(() => {
-    getMe();
+    getMe(); // Re-authenticate user on page reload
   }, []);
 
   const authInfo = {
@@ -81,7 +90,11 @@ localStorage.setItem("token", token); //token must be set in localStorage here, 
     setUser,
   };
 
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authInfo}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

@@ -52,7 +52,7 @@ const Navbar = () => {
         <div className="flex items-center gap-3 flex-1">
           <div className="relative group">
             <img
-              className="w-10 h-10 object-cover  transition-all duration-300  group-hover:scale-110 group-hover:rotate-6"
+              className="w-10 h-12 object-cover  transition-all duration-300  group-hover:scale-110 group-hover:rotate-6"
               src="/assets/logo.png"
               alt="Logo"
             />
@@ -155,7 +155,7 @@ const Navbar = () => {
       <div className={`lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu}></div>
 
       {/* Mobile Menu Panel */}
-      <div className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-[#0f1f60] to-[#1a2b7a] transform transition-transform duration-300 z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-black transform transition-transform duration-300 z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="pt-20 px-6">
           <ul className="space-y-6">
             <li>

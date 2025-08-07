@@ -23,7 +23,8 @@ const Login = ({ isOpen, onRequestClose, openRegister }) => {
       onRequestClose();
       navigate("/");
     } catch (err) {
-      toast.error("Login Failed: " , + err.message);// toast .error() usually takes one argument, so it must write like this . but here we are passing two arguments, the first is the message and the second is the error message
+     toast.error("Login Failed: " + err.message);
+// toast .error() usually takes one argument, so it must write like this . but here we are passing two arguments, the first is the message and the second is the error message
     }
   };
 

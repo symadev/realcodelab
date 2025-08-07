@@ -14,36 +14,20 @@ const SignUp = ({ isOpen, onRequestClose, openLogin }) => {
   const axiosPublic = UseAxiosPublic();
   const { createUser } = useContext(AuthContext);
 
-  const onSubmit = async (data) => {
-    try {
-      //create the user
-      await createUser(data.email, data.password);
+ const onSubmit = async (data) => {
+  try {
+   //here  call the create user from the authcontext
+    await createUser(data.name, data.email, data.password);
 
-      // Step 2: make te user object here
-      const newUser = {
-        name: data.name,
-        email: data.email,
-        role: "user",
-        createdAt: new Date()
-      };
+    toast.success("SignUp Successful");
+    navigate("/");
 
-      // create the post request to save it in mongodb 
-      const response = await axiosPublic.post("/user", newUser);
-
-      if (response.data.insertedId) {
-        toast.success("SignUp Successful");
-        navigate("/");
-
-
-      } else {
-        toast.error("Signup failed to save user");
-      }
-      reset();
-    } catch (error) {
-      console.error(error);
-      toast.error("Error occurred during signup");
-    }
-  };
+    reset();
+  } catch (error) {
+    console.error(error);
+    toast.error("Error occurred during signup");
+  }
+};
 
   return (
     <Modal
