@@ -82,7 +82,7 @@ const Login = ({ isOpen, onRequestClose, openRegister }) => {
           type="submit"
           className="w-full py-2.5 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-pink-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
         >
-          Enter Code Room
+          Login
         </button>
       </form>
 
