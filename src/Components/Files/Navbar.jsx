@@ -46,7 +46,7 @@ const Navbar = () => {
   return (
     <nav className="relative">
       {/* Top Navigation Bar */}
-      <div className="navbar fixed bg-[#0e0e0e] backdrop-blur-md bg-opacity-95 text-white px-6 py-3 top-0 z-50 shadow-2xl border-b border-white/10">
+      <div className="navbar fixed bg-[#0e0e0e] backdrop-blur-md bg-opacity-95 text-white px-6 py-3 top-0 z-50 shadow-2xl">
 
         {/* Logo Section */}
         <div className="flex items-center gap-3 flex-1">

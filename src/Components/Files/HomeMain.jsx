@@ -1,14 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 
 
 
 
 const HomeMain = () => {
+    const location = useLocation()
+    const noHeaderFooter =location.pathname.includes("enter") ||location.pathname.includes("/code/")
+    
     return (
         <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
+            {noHeaderFooter || <Navbar></Navbar>}
+             <Outlet></Outlet>
+     
            
           
            

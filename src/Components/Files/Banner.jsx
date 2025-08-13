@@ -43,7 +43,7 @@ const Banner = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                to="/AboutUs"
+                to="/enter"
                 className="group relative overflow-hidden bg-gradient-to-r from-yellow-500 to-yellow-400 text-black px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
                 <span className="relative z-10 flex items-center gap-2">
