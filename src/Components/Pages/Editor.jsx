@@ -17,8 +17,11 @@ export default function CodeEditor({ roomId, onGetCode }) {
 
     providerRef.current = provider;
 
+    // Get awareness from provider
+    const awareness = provider.awareness;
+
     provider.on("status", (event) => {
-      console.log(event.status); // "connected" or "disconnected"
+      console.log("Yjs WebSocket status:", event.status);
       setReady(event.status === "connected");
     });
 
@@ -44,18 +47,19 @@ export default function CodeEditor({ roomId, onGetCode }) {
     }
 
     const ytext = providerRef.current.doc.getText("monaco");
+    const awareness = providerRef.current.awareness;
 
-   //new binding here 
+    // Destroy previous binding if exists
     if (bindingRef.current) bindingRef.current.destroy();
 
     bindingRef.current = new MonacoBinding(
       ytext,
       editor.getModel(),
       new Set([editor]),
-      editor
+      awareness // <-- awareness added
     );
 
-    // Call onGetCode with current editor content
+    // Emit initial code
     if (onGetCode) onGetCode(editor.getValue());
 
     editor.onDidChangeCursorPosition((e) => {
