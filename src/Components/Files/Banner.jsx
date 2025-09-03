@@ -10,7 +10,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden bg-[#0e0e0e] min-h-screen  pt-14 flex items-center">
+    <div className="relative overflow-hidden bg-slate-950 min-h-screen  pt-14 flex items-center">
 
 
 

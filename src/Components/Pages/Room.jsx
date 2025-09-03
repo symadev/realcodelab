@@ -71,35 +71,45 @@ function Room() {
   }
 
   return (
-  <div className="p-6 md:p-8 bg-gradient-to-b from-slate-800 to-slate-900 min-h-screen">
-    <div className="flex items-center justify-between mb-6">
-      <h2 className="text-2xl font-bold text-white tracking-wide drop-shadow">
-        Code Together
-      </h2>
-      <select
-        className="bg-slate-700 text-white px-3 py-2 rounded-lg shadow-md 
+    <div className="p-6 md:p-8 bg-gradient-to-b from-slate-800 to-slate-900 min-h-screen">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold text-white tracking-wide drop-shadow">
+          Code Together
+        </h2>
+        <select
+          className="bg-slate-700 text-white px-3 py-2 rounded-lg shadow-md 
                    hover:bg-slate-600 focus:outline-none focus:ring-2 
                    focus:ring-slate-400 transition"
-        value={lang}
-        onChange={(e) => setLang(Number(e.target.value))}
-      >
-        <option value={63}>JavaScript (Node)</option>
-        <option value={71}>Python 3</option>
-        <option value={54}>C++</option>
-        <option value={62}>Java</option>
-      </select>
-    </div>
+          value={lang}
+          onChange={(e) => setLang(Number(e.target.value))}
+        >
+          <option value={63}>JavaScript (Node)</option>
+          <option value={71}>Python 3</option>
+          <option value={54}>C++</option>
+          <option value={62}>Java</option>
+          <option value={50}>C</option>
+          <option value={72}>Ruby</option>
+          <option value={60}>Go</option>
+          <option value={73}>Rust</option>
+          <option value={64}>PHP</option>
+          <option value={74}>TypeScript</option>
+          <option value={55}>C#</option>
+          <option value={68}>Kotlin</option>
+          <option value={70}>Swift</option>
 
-    <div className="flex flex-col md:flex-row gap-6">
-      <div className="flex-1 bg-slate-900/80 rounded-xl shadow-lg border border-slate-700 overflow-hidden">
-        <CodeEditor roomId={roomId} onGetCode={(fn) => (getCodeRef.current = fn)} />
+        </select>
       </div>
 
+      <div className="flex flex-col md:flex-row gap-6">
+        <div className="flex-1 bg-slate-900/80 rounded-xl shadow-lg border border-slate-700 overflow-hidden">
+          <CodeEditor roomId={roomId} onGetCode={(fn) => (getCodeRef.current = fn)} />
+        </div>
+
         <Sidebar roomId={roomId} run={run} output={output} clear={() => setOutput("")} />
-      
+
+      </div>
     </div>
-  </div>
-);
+  );
 
 
 }

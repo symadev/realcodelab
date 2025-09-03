@@ -50,8 +50,8 @@ function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen grid place-items-center bg-black">
-      <div className="w-[420px] max-w-[92vw] rounded-xl bg-gradient-to-br from-gray-900 via-purple-900 to-gray-800 text-white border border-slate-700 p-6 shadow-2xl">
+    <div className="min-h-screen grid place-items-center bg-slate-950">
+      <div className="w-[420px] max-w-[92vw] rounded-xl bg-gradient-to-b from-slate-800 to-slate-900 text-white border border-slate-700 p-6 shadow-2xl">
         <h2 className="text-center text-2xl font-semibold text-indigo-300">
           Register
         </h2>
