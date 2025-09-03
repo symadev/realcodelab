@@ -24,7 +24,6 @@ function RegisterPage() {
   }
 
   function createRoom() {
-     console.log("Create Room clicked");
     if (!canProceed) return;
     const id = shortId();
     setRoomId(id);
@@ -38,11 +37,16 @@ function RegisterPage() {
     goToRoom(id);
   }
 
-  function copyId() {
+  async function copyId() {
     if (!roomId) return;
-    navigator.clipboard.writeText(roomId);
-    setCopyLabel(" Copied!");
-    setTimeout(() => setCopyLabel("📋"), 1000);
+    try {
+      await navigator.clipboard.writeText(roomId);
+      setCopyLabel("Copied!");
+      setTimeout(() => setCopyLabel("📋"), 1000);
+    } catch (err) {
+      console.error("Clipboard write failed:", err);
+      alert("Cannot copy to clipboard. Please copy manually.");
+    }
   }
 
   return (
@@ -52,25 +56,32 @@ function RegisterPage() {
           Register
         </h2>
 
-        <label className="block text-slate-300 text-sm mt-6 mb-2">Your name</label>
+        <label htmlFor="name" className="block text-slate-300 text-sm mt-6 mb-2">
+          Your name
+        </label>
         <input
+          id="name"
+          name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="name"
+          placeholder="Enter your name"
           className="w-full bg-gray-800/50 text-slate-100 rounded-lg px-3 py-2 outline-none border border-slate-700 focus:border-indigo-500"
         />
 
-        <label className="block text-slate-400 text-sm mt-4 mb-2">
+        <label htmlFor="roomId" className="block text-slate-400 text-sm mt-4 mb-2">
           Room ID <span className="opacity-60">(Optional if you create new)</span>
         </label>
         <div className="flex gap-2">
           <input
+            id="roomId"
+            name="roomId"
             value={roomId}
             onChange={(e) => setRoomId(e.target.value.toUpperCase())}
             placeholder="Enter existing Room ID"
             className="flex-1 bg-gray-800/50 text-slate-100 rounded-lg px-3 py-2 outline-none border border-slate-700 focus:border-indigo-500"
           />
           <button
+            type="button"
             onClick={copyId}
             className="px-3 rounded-lg bg-gray-800/50 border border-slate-700 hover:bg-slate-700 text-lg"
             title="Copy Room ID"
@@ -80,6 +91,7 @@ function RegisterPage() {
         </div>
 
         <button
+          type="button"
           onClick={createRoom}
           disabled={!canProceed}
           className="w-full mt-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 font-medium"
@@ -88,6 +100,7 @@ function RegisterPage() {
         </button>
 
         <button
+          type="button"
           onClick={joinRoom}
           disabled={!canProceed}
           className="w-full mt-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 font-medium"
