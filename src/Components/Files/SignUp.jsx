@@ -14,20 +14,19 @@ const SignUp = ({ isOpen, onRequestClose, openLogin }) => {
   const axiosPublic = UseAxiosPublic();
   const { createUser } = useContext(AuthContext);
 
- const onSubmit = async (data) => {
+const onSubmit = async (data) => {
   try {
-   //here  call the create user from the authcontext
     await createUser(data.name, data.email, data.password);
-
     toast.success("SignUp Successful");
-    navigate("/");
-
+    onRequestClose();   
+    navigate("/"); 
     reset();
   } catch (error) {
     console.error(error);
     toast.error("Error occurred during signup");
   }
 };
+
 
   return (
     <Modal

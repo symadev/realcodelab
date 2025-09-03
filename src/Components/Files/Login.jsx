@@ -13,20 +13,20 @@ const Login = ({ isOpen, onRequestClose, openRegister }) => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+  e.preventDefault();
+  const email = e.target.email.value;
+  const password = e.target.password.value;
 
-    try {
-      await signIn(email, password); 
-      toast.success("Login Successful");
-      onRequestClose();
-      navigate("/");
-    } catch (err) {
-     toast.error("Login Failed: " + err.message);
-// toast .error() usually takes one argument, so it must write like this . but here we are passing two arguments, the first is the message and the second is the error message
-    }
-  };
+  try {
+    await signIn(email, password);
+    toast.success("Login Successful");
+    onRequestClose();   
+    navigate("/"); 
+  } catch (err) {
+    toast.error("Login Failed: " + err.message);
+  }
+};
+
 
   return (
     <Modal
