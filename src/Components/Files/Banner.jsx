@@ -62,21 +62,23 @@ const Banner = () => {
             </div>
 
             {/* Image Section */}
-            <div
-              className={`flex-1 flex justify-center items-center transition-all duration-1000 delay-300 ${
-                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
+             <div
+            className={`flex-1 flex justify-center items-center transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
               }`}
-            >
-              <div className="absolute inset-16 bg-purple-500 opacity-30 blur-3xl rounded-full group-hover:opacity-70 transition-opacity duration-500 z-0" />
+          >
+            {/* Outer Glow */}
+            {/* insert means it work on the inner section. if insert value is more big the it show the box or container more small in size */}
+            <div className="absolute inset-16 bg-purple-500 opacity-30 blur-3xl rounded-full group-hover:opacity-70 transition-opacity duration-500 z-0" />
 
-              <div className="relative group max-w-[600px] w-full h-auto rounded-lg overflow-hidden">
-                <img
-                  src="/assets/2.png"
-                  alt="Banner"
-                  className="w-4/5 h-4/5 object-cover rounded-xl shadow-2xl group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+            <div className="relative group max-w-[600px] w-full h-auto rounded-lg overflow-hidden">
+              {/* Main Image */}
+              <img
+                src="/assets/2.png"
+                alt="Banner"
+                className="w-80% h-80% object-cover rounded-xl shadow-2xl group-hover:scale-105 transition-transform duration-500"
+              />
             </div>
+          </div>
 
           </div>
         </div>
