@@ -1,23 +1,44 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Provider/AuthContext";
+import { Copy } from "lucide-react";
 
 function Sidebar({ roomId, run, output, clear }) {
   const [stdin, setStdin] = useState("");
+ 
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(roomId);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); 
+  };
 
   return (
     <aside className="w-full md:w-1/3 space-y-6">
-   
+
       <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-5 rounded-lg border border-slate-700 shadow-lg">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-lg flex items-center">
             <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></span>
-            Users
+            Users 
           </h3>
           <div className="text-right">
-            <div className="text-xs text-purple-200 opacity-80 mb-1">Invitation Code</div>
-            <span className="text-sm font-mono bg-purple-700 px-3 py-1 rounded-md text-green-300 font-semibold">
-              {roomId}
-            </span>
+            <div className="text-sm text-purple-200 opacity-80 mb-1">Invitation Code</div>
+            <div className="flex items-center justify-end gap-2">
+              <span className="text-sm font-mono bg-purple-700 px-3 py-1 rounded-md text-green-300 font-semibold">
+                {roomId}
+              </span>
+              <button
+                onClick={handleCopy}
+                className="p-1 rounded-md bg-purple-700 hover:bg-purple-600 text-green-300"
+                title="Copy code"
+              >
+                <Copy size={16} />
+              </button>
+            </div>
+            {copied && <div className="text-xs text-green-400 mt-1">Copied!</div>}
           </div>
+
         </div>
       </div>
 
@@ -37,7 +58,7 @@ function Sidebar({ roomId, run, output, clear }) {
           className="mt-4 w-full px-4 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-semibold rounded-lg hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-200 shadow-md"
           onClick={() => run(stdin)}
         >
-           Submit Code
+          Submit Code
         </button>
       </div>
 
@@ -48,11 +69,11 @@ function Sidebar({ roomId, run, output, clear }) {
             <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
             Output
           </div>
-          <button 
-            className="text-red-400 text-xs font-medium hover:text-red-300 bg-red-900 bg-opacity-20 px-3 py-1 rounded-md hover:bg-opacity-30 transition-all duration-200" 
+          <button
+            className="text-red-400 text-xs font-medium hover:text-red-300 bg-red-900 bg-opacity-20 px-3 py-1 rounded-md hover:bg-opacity-30 transition-all duration-200"
             onClick={clear}
           >
-             Clear
+            Clear
           </button>
         </div>
         <div className="bg-slate-700 border border-slate-600 rounded-lg p-3 max-h-64 overflow-y-auto">
