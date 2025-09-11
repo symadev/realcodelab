@@ -12,22 +12,23 @@ function Sidebar({ roomId, run, output, clear }) {
 
   // join room & listen for users
   useEffect(() => {
-    const handleRoomUsers = (usersList) => {
-      console.log("room_users event received:", usersList);
-      setUsers(usersList); 
-    };
+  const handleRoomUsers = (usersList) => {
+    console.log("room_users event received:", usersList);
+    setUsers(usersList);
+  };
 
-    // get name from localStorage info 
-    const localName = localStorage.getItem("rcl:name") || user?.name || "Guest";
-    console.log("Joining room:", roomId, "with name:", localName);
+  const localName = localStorage.getItem("rcl:name") || user?.name || "Guest";
+  console.log("Joining room:", roomId, "with name:", localName);
+  // attach listener first then do the emit ,, otherwise the emit will be miss
 
-    socket.emit("join_room", { room_id: roomId, name: localName });
-    socket.on("room_users", handleRoomUsers);
+  socket.emit("join_room", { room_id: roomId, name: localName });
+  socket.on("room_users", handleRoomUsers);
 
-    return () => {
-      socket.off("room_users", handleRoomUsers);
-    };
-  }, [roomId]); // dependency only roomId
+  return () => {
+    socket.off("room_users", handleRoomUsers);
+  };
+}, [roomId, user?.name]); 
+
 
   const handleCopy = () => {
     navigator.clipboard.writeText(roomId);
@@ -46,8 +47,8 @@ function Sidebar({ roomId, run, output, clear }) {
         </h3>
 
         <ul className="ml-6 mt-2 list-disc text-sm">
-          {users.map((u) => (
-            <li key={u.id}>{u.name}</li>
+          {users.map((user) => (
+            <li key={user.id}>{user.name}</li>
           ))}
         </ul>
 
