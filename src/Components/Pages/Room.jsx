@@ -8,7 +8,8 @@ function Room() {
   const { id: roomId } = useParams();
   const getCodeRef = useRef(() => "");
   const [output, setOutput] = useState("");
-  const [lang, setLang] = useState(63); // JS default
+  const [lang, setLang] = useState(63); 
+  
 
   // Save code snapshot every 15 sec
   useEffect(() => {
