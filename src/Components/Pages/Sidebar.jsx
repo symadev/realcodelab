@@ -10,24 +10,47 @@ function Sidebar({ roomId, run, output, clear }) {
   const [copied, setCopied] = useState(false);
   const [users, setUsers] = useState([]);
 
+
+
+
   // join room & listen for users
-  useEffect(() => {
-  const handleRoomUsers = (usersList) => {
-    console.log("room_users event received:", usersList);
-    setUsers(usersList);
+ useEffect(() => {
+  const localName = localStorage.getItem("rcl:name") || user?.name || "Guest";
+
+  const joinRoom = () => {
+    console.log("Joining room:", roomId, "as", localName);
+    socket.emit("join_room", { room_id: roomId, name: localName });
   };
 
-  const localName = localStorage.getItem("rcl:name") || user?.name || "Guest";
-  console.log("Joining room:", roomId, "with name:", localName);
   // attach listener first then do the emit ,, otherwise the emit will be miss
 
-  socket.emit("join_room", { room_id: roomId, name: localName });
-  socket.on("room_users", handleRoomUsers);
+  if (socket.connected) {
+    
+    joinRoom();
+  } else {
+    // wait for connect event
+    socket.on("connect", () => {
+      console.log("Socket connected:", socket.id);
+      joinRoom();
+    });
+  }
+
+  socket.on("disconnect", () => console.log("Socket disconnected"));
+  socket.on("room_users", (users) => {
+    console.log("room_users event received:", users);
+    setUsers(users);
+  });
 
   return () => {
-    socket.off("room_users", handleRoomUsers);
+    socket.off("connect");
+    socket.off("disconnect");
+    socket.off("room_users");
   };
-}, [roomId, user?.name]); 
+}, [roomId, user?.name]);
+
+
+
+
 
 
   const handleCopy = () => {
@@ -38,7 +61,6 @@ function Sidebar({ roomId, run, output, clear }) {
 
   return (
     <aside className="w-full md:w-1/3 space-y-6">
-
       {/* Users Section */}
       <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-5 rounded-lg border border-slate-700 shadow-lg">
         <h3 className="font-semibold text-lg flex items-center mb-2">
